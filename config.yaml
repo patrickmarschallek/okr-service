@@ -1,0 +1,11 @@
+name: OKR-Service
+host: localhost
+basePath: /api/v1
+port: 8080
+persistence:
+    driver: mysql
+    port: 3306
+    host: 127.0.0.1
+    database: okr
+    user: root
+    password: 
