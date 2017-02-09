@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"flag"
 	"net/http"
 
 	"github.com/uber-go/zap"
@@ -11,31 +11,22 @@ import (
 	"recipe/config"
 )
 
+var logger zap.Logger
+
 func init() {
-	recipe.Logger = zap.New(zap.NewTextEncoder(zap.TextNoTime()),
+	recipe.NewLogger(zap.New(
+		zap.NewTextEncoder(zap.TextNoTime()),
 		zap.DebugLevel,
-	)
+	))
 }
 
 func main() {
-	// defer func() {
-	// 	if r := recover(); r != nil {
-	// 		recipe.Logger.Fatal("Recoverd error.",
-	// 			zap.Object("recover", r),
-	// 		)
-	// 	}
-	// }()
-	defer func() {
-		if r := recover(); r != nil {
-			err, ok := r.(error)
-			if !ok {
-				err = fmt.Errorf("pkg: %+v", r)
-			}
-			fmt.Printf("ERROR: %+v", err)
-		}
-	}()
 
-	conf, err := config.ReadConfig("config.yaml")
+	//custom flags...
+	flag.Parse()
+
+	// TODO read flags
+	conf, err := config.InitConfig("config.yaml")
 	if err != nil {
 		recipe.Logger.Fatal("configuration error",
 			zap.Error(err),

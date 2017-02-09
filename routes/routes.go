@@ -6,9 +6,11 @@ import (
 )
 
 var AppRoutes = recipe.Routes{
-	recipe.Route{"ObjectiveList", "GET", "/objectives", hanlders.TodoIndex},
-	recipe.Route{"findObjective", "GET", "/objectives/{objectiveId}", hanlders.TodoShow},
+
+	recipe.Route{"ObjectiveList", "GET", "/objectives", hanlders.ListObjectives},
+	recipe.Route{"findObjective", "GET", "/objectives/{objectiveID}", hanlders.FindObjective},
 	recipe.Route{"addKeyResultsToObjective", "POST", "/objectives", hanlders.PostObjective},
-	recipe.Route{"replaceKeyREsultsForObjective", "PUT", "/objectives/{objectiveId}/key-kesult", hanlders.TodoShow},
-	recipe.Route{"ReplaceObjective", "PUT", "/objectives/{objectiveId}", hanlders.TodoShow},
+	recipe.Route{"ReplaceObjective", "PUT", "/objectives/{objectiveId}", hanlders.ReplaceObjective},
+
+	recipe.Route{"replaceKeyResultsForObjective", "PUT", "/objectives/{objectiveId}/key-kesults", recipe.IndexHandler},
 }

@@ -1,9 +1,12 @@
 package structures
 
-import "recipe/common"
+import (
+	"recipe/common"
+	"reflect"
+)
 
 // Grade shows how good something was (0.3, 0.5, 0.7, 1.0)
-type Grade float32
+type Grade float64
 
 var grades = [5]Grade{
 	0.0,
@@ -11,6 +14,10 @@ var grades = [5]Grade{
 	0.5,
 	0.7,
 	1.0,
+}
+
+func (g Grade) Value() float64 {
+	return reflect.ValueOf(g).Float()
 }
 
 func (g Grade) Up() {
